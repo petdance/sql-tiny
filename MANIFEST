@@ -1,0 +1,13 @@
+Changes
+lib/SQL/Tiny.pm
+Makefile.PL
+MANIFEST
+README.md
+t/00-load.t
+t/delete.t
+t/insert.t
+t/select.t
+t/update.t
+
+# No need to ship this.
+# t/pod.t

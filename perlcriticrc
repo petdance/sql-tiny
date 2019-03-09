@@ -1,0 +1,47 @@
+verbose = %f:%l:%c %m (%p)\n    %r\n\n
+
+[-CodeLayout::ProhibitParensWithBuiltins]
+[CodeLayout::ProhibitHardTabs]
+allow_leading_tabs = 0
+[-CodeLayout::RequireTidyCode]
+# Never works for me.
+[-CodeLayout::RequireTrailingCommaAtNewline]
+# I like this one but it gives too many false positives.
+
+[Compatibility::PodMinimumVersion]
+above_version = 5.010001
+
+[-Documentation::PodSpelling]
+[-Documentation::RequireEndBeforeLastPod]
+[-Documentation::RequireLinkedURLs]
+[-Documentation::RequirePodAtEnd]
+[-Documentation::RequirePodLinksIncludeText]
+# I'm not worried about link text.
+[-Documentation::RequirePodSections]
+
+[-Editor::RequireEmacsFileVariables]
+
+[-Modules::RequireExplicitInclusion]
+# We'd really like to use this, but it's too noisy as is.
+# If https://github.com/Perl-Critic/Perl-Critic-StricterSubs/issues/9 ever gets implemented, add this back in.
+
+[-Modules::RequireVersionVar]
+
+[-Subroutines::ProhibitBuiltinHomonyms]
+# We have plenty of funcs that we know are homonyms in ack, like open and close, but that's OK
+[-Subroutines::ProhibitCallsToUndeclaredSubs]
+[-Subroutines::ProhibitExplicitReturnUndef]
+
+[-ValuesAndExpressions::ProhibitEmptyQuotes]
+[-ValuesAndExpressions::ProhibitMagicNumbers]
+[-ValuesAndExpressions::ProhibitNoisyQuotes]
+[-ValuesAndExpressions::RequireConstantOnLeftSideOfEquality]
+[-ValuesAndExpressions::RequireNumberSeparators]
+[-ValuesAndExpressions::RequireNumericVersion]
+[-ValuesAndExpressions::RestrictLongStrings]
+
+[Variables::ProhibitPackageVars]
+packages = Test::Builder
+
+[Variables::ProhibitReusedNames]
+severity = 5
