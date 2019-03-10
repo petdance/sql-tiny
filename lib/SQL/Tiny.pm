@@ -50,19 +50,42 @@ SQL code for simple cases.
 
 I'd far rather have:
 
-    my ($sql,$binds) = sql_insert( 'users', { name => 'Dave', status => 'Active' } );
+    my ($sql,$binds) = sql_insert(
+        'users',
+        {
+            name      => 'Dave',
+            salary    => 50000,
+            status    => 'Active',
+            dateadded => \'SYSDATE()',
+        }
+    );
 
 than hand-coding:
 
-    my $sql   = 'INSERT INTO users (name,status) VALUES (:name,:status)';
-    my $binds = { ':name' => 'Dave', ':status' => 'Active' };
+    my $sql   = 'INSERT INTO users (name,salary,status,dateadded) VALUES (:name,:status,:salary,SYSDATE())';
+    my $binds = {
+        ':name'      => 'Dave',
+        ':salary'    => 50000,
+        ':status'    => 'Active',
+        ':dateadded' => \'SYSDATE()',
+    };
 
 or even the positional:
 
-    my $sql   = 'INSERT INTO users (name,status) VALUES (?,?)';
-    my $binds = [ 'Dave', 'Active' ];
+    my $sql   = 'INSERT INTO users (name,salary,status,dateadded) VALUES (?,?,?,SYSDATE())';
+    my $binds = [ 'Dave', 50000, 'Active' ];
 
-You don't want to use SQL::Tiny where speed is essential.
+The trade-off for that brevity of code is that SQL::Tiny has to make new
+SQL and binds from the input every time. You can't cache the SQL that
+comes back from SQL::Tiny because the placeholders could vary depending
+on what the input data is. Therefore, you don't want to use SQL::Tiny
+where speed is essential.
+
+The other trade-off is that SQL::Tiny handles only very simple code.
+It won't handle JOINs of any kind.
+
+SQL::Tiny isn't meant for all of your SQL needs, only the simple ones
+that you do over and over.
 
 =head1 EXPORT
 
