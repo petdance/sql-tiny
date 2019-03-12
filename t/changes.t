@@ -2,6 +2,7 @@
 
 use warnings;
 use strict;
+use 5.010;
 
 use Test::More;
 
