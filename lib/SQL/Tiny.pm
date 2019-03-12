@@ -173,14 +173,13 @@ sub sql_insert {
         "INSERT INTO $table"
     );
 
-    my @columns;
     my @values;
     my @binds;
 
-    for my $key ( sort keys %{$values} ) {
+    my @columns = sort keys %{$values};
+    for my $key ( @columns ) {
         my $value = $values->{$key};
 
-        push @columns, $key;
         if ( !defined($value) ) {
             push @values, 'NULL';
         }
