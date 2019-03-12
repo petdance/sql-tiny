@@ -25,5 +25,10 @@ my $where = {
     thingy  => undef,
 };
 
-my $t = timeit( 1000, sub { my ($sql,$binds) = sql_update( 'foo', $fields, $where ); } );
+
+my $sub = sub { my ($sql,$binds) = sql_update( 'foo', $fields, $where ) };
+
+my $t = timeit( 1000, $sub );
 {use Data::Dumper; local $Data::Dumper::Sortkeys=1; warn Dumper( $t )}
+
+timethis( 100_000, $sub );
