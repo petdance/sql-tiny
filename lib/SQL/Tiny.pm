@@ -384,6 +384,7 @@ L<https://github.com/petdance/sql-tiny/issues>
 =head1 ACKNOWLEDGEMENTS
 
 Thanks to the following folks for their contributions:
+Mohammad S Anwar,
 Tim Heaney.
 
 =head1 LICENSE AND COPYRIGHT
