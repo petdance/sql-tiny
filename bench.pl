@@ -8,7 +8,7 @@ use Benchmark ':all';
 
 use blib;
 
-use SQL::Tiny 'sql_update';;
+use SQL::Tiny ':all';
 
 my $fields = {
     name    => 'Dave',
@@ -26,9 +26,10 @@ my $where = {
 };
 
 
-my $sub = sub { my ($sql,$binds) = sql_update( 'foo', $fields, $where ) };
+my $sub = sub { my ($sql,$binds) = sql_insert( 'foo', $fields, $where ) };
+timethis( 500_000, $sub );
 
+__END__
 my $t = timeit( 1000, $sub );
 {use Data::Dumper; local $Data::Dumper::Sortkeys=1; warn Dumper( $t )}
 
-timethis( 100_000, $sub );
