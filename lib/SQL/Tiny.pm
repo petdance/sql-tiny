@@ -131,14 +131,8 @@ sub sql_select {
     );
 
     my @binds;
-    my @where_conditions;
 
-    _build_where( $where, \@where_conditions, \@binds );
-
-    if ( @where_conditions ) {
-        push @parts, 'WHERE ' . join( ' AND ', @where_conditions );
-    }
-
+    _build_where_section( \@parts, $where, \@binds );
     _build_by_section( \@parts, 'GROUP BY', $other->{group_by} );
     _build_by_section( \@parts, 'ORDER BY', $other->{order_by} );
 
@@ -241,7 +235,6 @@ sub sql_update {
     );
 
     my @columns;
-    my @where_conditions;
     my @binds;
 
     for my $key ( sort keys %{$values} ) {
@@ -260,11 +253,7 @@ sub sql_update {
     }
     push @parts, 'SET ' . join( ', ', @columns );
 
-    _build_where( $where, \@where_conditions, \@binds );
-
-    if ( @where_conditions ) {
-        push @parts, 'WHERE ' . join( ' AND ', @where_conditions );
-    }
+    _build_where_section( \@parts, $where, \@binds );
 
     my $sql = join( ' ', @parts );
 
@@ -303,14 +292,9 @@ sub sql_delete {
         "DELETE FROM $table"
     );
 
-    my @where_conditions;
     my @binds;
 
-    _build_where( $where, \@where_conditions, \@binds );
-
-    if ( @where_conditions ) {
-        push @parts, 'WHERE ' . join( ' AND ', @where_conditions );
-    }
+    _build_where_section( \@parts, $where, \@binds );
 
     my $sql = join( ' ', @parts );
 
@@ -318,27 +302,32 @@ sub sql_delete {
 }
 
 
-sub _build_where {
-    my $where      = shift;
-    my $conditions = shift;
-    my $binds      = shift;
+sub _build_where_section {
+    my $parts = shift;
+    my $where = shift;
+    my $binds = shift;
 
+    my @conditions;
     for my $key ( sort keys %{$where} ) {
         my $value = $where->{$key};
         if ( !defined($value) ) {
-            push @{$conditions}, "$key IS NULL";
+            push @conditions, "$key IS NULL";
         }
         elsif ( ref($value) eq 'ARRAY' ) {
-            push @{$conditions}, "$key IN (" . join( ',', ('?') x @{$value} ) . ')';
+            push @conditions, "$key IN (" . join( ',', ('?') x @{$value} ) . ')';
             push @{$binds}, @{$value};
         }
         elsif ( ref($value) eq 'SCALAR' ) {
-            push @{$conditions}, "$key=${$value}";
+            push @conditions, "$key=${$value}";
         }
         else {
-            push @{$conditions}, "$key=?";
+            push @conditions, "$key=?";
             push @{$binds}, $value;
         }
+    }
+
+    if ( @conditions ) {
+        push @{$parts}, 'WHERE ' . join( ' AND ', @conditions );
     }
 
     return;
