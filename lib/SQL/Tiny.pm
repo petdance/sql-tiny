@@ -41,7 +41,7 @@ our @EXPORT_OK = qw(
 A very simple SQL-building library.  It's not for all your SQL needs,
 only the very simple ones.
 
-It doesn't handle JOINs.  It doesn't handle GROUP BY.  It doens't handle
+It doesn't handle JOINs.  It doesn't handle GROUP BY.  It doesn't handle
 subselects.  It's only for simple SQL.
 
 In my test suites, I have a lot of ad hoc SQL queries, and it drives me
