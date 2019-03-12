@@ -1,6 +1,10 @@
-Revision history for SQL::Tiny
+Revision history for Perl module SQL::Tiny
 
-0.01    Fri Mar  8 23:40:27 CST 2019
-=====================================
-First version.  It might be the last.  I don't know that it will need
-any new features added to it.
+NEXT
+
+    - Added ':all' export tag.
+
+
+0.01 2019-03-08 23:40:27 CST
+
+    - First version.

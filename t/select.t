@@ -6,7 +6,7 @@ use 5.010;
 
 use Test::More tests => 4;
 
-use SQL::Tiny qw( sql_select );
+use SQL::Tiny ':all';
 
 test_select(
     [

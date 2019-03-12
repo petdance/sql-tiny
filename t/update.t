@@ -6,7 +6,7 @@ use 5.010;
 
 use Test::More tests => 3;
 
-use SQL::Tiny qw( sql_update );
+use SQL::Tiny ':all';
 
 test_update(
     'users',

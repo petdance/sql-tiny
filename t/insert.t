@@ -6,7 +6,7 @@ use 5.010;
 
 use Test::More tests => 1;
 
-use SQL::Tiny qw( sql_insert );
+use SQL::Tiny ':all';
 
 test_insert(
     'users',

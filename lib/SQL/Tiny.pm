@@ -25,6 +25,10 @@ our @EXPORT_OK = qw(
     sql_delete
 );
 
+our %EXPORT_TAGS = (
+    all => [@EXPORT_OK],
+);
+
 
 =head1 SYNOPSIS
 
@@ -89,7 +93,7 @@ that you do over and over.
 
 =head1 EXPORT
 
-All subs can be exported, but none are by default.
+All subs can be exported, but none are by default.  C<:all> exports all subs.
 
 =head1 SUBROUTINES/METHODS
 
