@@ -377,6 +377,9 @@ L<https://github.com/petdance/sql-simple/issues>
 
 =head1 ACKNOWLEDGEMENTS
 
+Thanks to the following folks for their contributions:
+Tim Heaney.
+
 =head1 LICENSE AND COPYRIGHT
 
 Copyright 2019 Andy Lester.
