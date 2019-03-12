@@ -139,29 +139,13 @@ sub sql_select {
         push @parts, 'WHERE ' . join( ' AND ', @where_conditions );
     }
 
-    if ( my $group = $other->{group_by} ) {
-        if ( ref($group) eq 'ARRAY' ) {
-            push @parts, 'GROUP BY ' . join( ',', @{$group} );
-        }
-        else {
-            push @parts, "GROUP BY $group";
-        }
-    }
-
-    if ( my $order = $other->{order_by} ) {
-        if ( ref($order) eq 'ARRAY' ) {
-            push @parts, 'ORDER BY ' . join( ',', @{$order} );
-        }
-        else {
-            push @parts, "ORDER BY $order";
-        }
-    }
+    _build_by_section( \@parts, 'GROUP BY', $other->{group_by} );
+    _build_by_section( \@parts, 'ORDER BY', $other->{order_by} );
 
     my $sql = join( ' ', @parts );
 
     return ( $sql, \@binds );
 }
-
 
 =head2 sql_insert( $table, \%values )
 
@@ -354,6 +338,24 @@ sub _build_where {
         else {
             push @{$conditions}, "$key=?";
             push @{$binds}, $value;
+        }
+    }
+
+    return;
+}
+
+
+sub _build_by_section {
+    my $parts   = shift;
+    my $section = shift;
+    my $columns = shift;
+
+    if ( $columns ) {
+        if ( ref($columns) eq 'ARRAY' ) {
+            push @{$parts}, $section . ' ' . join( ',', @{$columns} );
+        }
+        else {
+            push @{$parts}, "$section $columns";
         }
     }
 
