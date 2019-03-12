@@ -34,6 +34,8 @@ our %EXPORT_TAGS = (
 
     my ($sql,$binds) = sql_select( 'users', [ 'name', 'status' ], { status => [ 'Deleted', 'Inactive' ] }, { order_by => 'name' } );
 
+    my ($sql,$binds) = sql_select( 'users', [ 'COUNT(*)' ], { status => [ 'Deleted', 'Inactive' ] }, { group_by => 'status' } );
+
     my ($sql,$binds) = sql_insert( 'users', { name => 'Dave', status => 'Active' } );
 
     my ($sql,$binds) = sql_update( 'users', { status => 'Inactive' }, { password => undef } );
