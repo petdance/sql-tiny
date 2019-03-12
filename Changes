@@ -2,6 +2,8 @@ Revision history for Perl module SQL::Tiny
 
 NEXT
 
+    - Added 'group_by' capability to sql_select.
+
     - Added ':all' export tag.
 
 

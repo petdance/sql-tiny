@@ -101,6 +101,8 @@ All subs can be exported, but none are by default.  C<:all> exports all subs.
 
 Creates simple SELECTs and binds.
 
+The C<%other> can contain C<group_by> and C<order_by>.
+
 Calling:
 
     my ($sql,$binds) = sql_select(
@@ -135,6 +137,15 @@ sub sql_select {
 
     if ( @where_conditions ) {
         push @parts, 'WHERE ' . join( ' AND ', @where_conditions );
+    }
+
+    if ( my $group = $other->{group_by} ) {
+        if ( ref($group) eq 'ARRAY' ) {
+            push @parts, 'GROUP BY ' . join( ',', @{$group} );
+        }
+        else {
+            push @parts, "GROUP BY $group";
+        }
     }
 
     if ( my $order = $other->{order_by} ) {

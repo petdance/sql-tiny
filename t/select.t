@@ -4,7 +4,7 @@ use warnings;
 use strict;
 use 5.010;
 
-use Test::More tests => 4;
+use Test::More tests => 6;
 
 use SQL::Tiny ':all';
 
@@ -30,6 +30,32 @@ test_select(
 
     'SELECT COUNT(*) FROM users WHERE status IN (?,?,?)',
     [ 'X', 'Y', 'Z' ]
+);
+
+
+test_select(
+    [
+        'users',
+        [ 'COUNT(*)' ],
+        { status => [qw( X Y Z )] },
+        { group_by => 'status', order_by => [qw( name state )] },
+    ],
+
+    'SELECT COUNT(*) FROM users WHERE status IN (?,?,?) GROUP BY status ORDER BY name,state',
+    [ 'X', 'Y', 'Z' ]
+);
+
+
+test_select(
+    [
+        'users',
+        [ 'COUNT(*)' ],
+        {},
+        { group_by => [qw( status state )] },
+    ],
+
+    'SELECT COUNT(*) FROM users GROUP BY status,state',
+    []
 );
 
 
