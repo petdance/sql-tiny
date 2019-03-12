@@ -32,13 +32,13 @@ our %EXPORT_TAGS = (
 
 =head1 SYNOPSIS
 
-    my ($sql,$bind) = sql_select( 'users', [ 'name', 'status' ], { status => [ 'Deleted', 'Inactive' ] );
+    my ($sql,$binds) = sql_select( 'users', [ 'name', 'status' ], { status => [ 'Deleted', 'Inactive' ] }, { order_by => 'name' } );
 
-    my ($sql,$bind) = sql_insert( 'users', { name => 'Dave', status => 'Active' } );
+    my ($sql,$binds) = sql_insert( 'users', { name => 'Dave', status => 'Active' } );
 
-    my ($sql,$bind) = sql_update( 'users', { status => 'Inactive' }, { password => undef } );
+    my ($sql,$binds) = sql_update( 'users', { status => 'Inactive' }, { password => undef } );
 
-    my ($sql,$bind) = sql_delete( 'users', { status => 'Inactive' } );
+    my ($sql,$binds) = sql_delete( 'users', { status => 'Inactive' } );
 
 =head1 DOCUMENTATION
 
