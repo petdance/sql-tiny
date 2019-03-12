@@ -33,10 +33,10 @@ You can also look for information at:
         https://metacpan.org/release/SQL-Tiny
 
     Project home page
-        https://github.com/petdance/sql-simple
+        https://github.com/petdance/sql-tiny
 
     Project issue tracker
-        https://github.com/petdance/sql-simple/issues
+        https://github.com/petdance/sql-tiny/issues
 
 ## LICENSE AND COPYRIGHT
 

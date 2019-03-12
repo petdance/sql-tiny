@@ -358,7 +358,7 @@ Andy Lester, C<< <andy at petdance.com> >>
 =head1 BUGS
 
 Please report any bugs or feature requests to
-L<https://github.com/petdance/sql-simple/issues>, or email me directly.
+L<https://github.com/petdance/sql-tiny/issues>, or email me directly.
 
 =head1 SUPPORT
 
@@ -376,7 +376,7 @@ L<https://metacpan.org/release/SQL-Tiny>
 
 =item * GitHub issue tracker
 
-L<https://github.com/petdance/sql-simple/issues>
+L<https://github.com/petdance/sql-tiny/issues>
 
 =back
 
