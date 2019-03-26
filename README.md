@@ -47,7 +47,7 @@ or even the positional:
 # Build status of dev branch
 
 * Travis (Linux) [![Build Status](https://travis-ci.org/petdance/sql-tiny.png?branch=dev)](https://travis-ci.org/petdance/sql-tiny)
-* [CPAN Testers](http://cpantesters.org/distro/A/ack.html)
+* [CPAN Testers](https://cpantesters.org/distro/S/sql-tiny.html)
 
 # Installation
 
