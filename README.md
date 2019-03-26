@@ -44,7 +44,12 @@ or even the positional:
     my $sql   = 'INSERT INTO users (name,salary,status,dateadded) VALUES (?,?,?,SYSDATE())';
     my $binds = [ 'Dave', 50000, 'Active' ];
 
-## INSTALLATION
+# Build status of dev branch
+
+* Travis (Linux) [![Build Status](https://travis-ci.org/petdance/sql-tiny.png?branch=dev)](https://travis-ci.org/petdance/sql-tiny)
+* [CPAN Testers](http://cpantesters.org/distro/A/ack.html)
+
+# Installation
 
 To install this module, run the following commands:
 
@@ -53,7 +58,7 @@ To install this module, run the following commands:
     make test
     make install
 
-## SUPPORT AND DOCUMENTATION
+# Support and Documentation
 
 After installing, you can find documentation for this module with the
 perldoc command.
@@ -71,7 +76,7 @@ You can also look for information at:
     Project issue tracker
         https://github.com/petdance/sql-tiny/issues
 
-## LICENSE AND COPYRIGHT
+# License and Copyright
 
 Copyright (C) 2019 Andy Lester
 
