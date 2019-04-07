@@ -1,6 +1,6 @@
 Revision history for Perl module SQL::Tiny
 
-NEXT
+0.04 2019-04-06 22:32:46 CDT
 
     - Added ability to pass SQL functions.
 
