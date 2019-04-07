@@ -1,0 +1,20 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+MY	Makefile.PL	/^sub MY::postamble {$/;"	s
+SQL::Tiny	lib/SQL/Tiny.pm	/^package SQL::Tiny;$/;"	p
+_build_by_section	lib/SQL/Tiny.pm	/^sub _build_by_section {$/;"	s
+_build_where_section	lib/SQL/Tiny.pm	/^sub _build_where_section {$/;"	s
+critic	Makefile.PL	/^critic:$/;"	l
+sql_delete	lib/SQL/Tiny.pm	/^sub sql_delete {$/;"	s
+sql_insert	lib/SQL/Tiny.pm	/^sub sql_insert {$/;"	s
+sql_select	lib/SQL/Tiny.pm	/^sub sql_select {$/;"	s
+sql_update	lib/SQL/Tiny.pm	/^sub sql_update {$/;"	s
+tags	Makefile.PL	/^tags:$/;"	l
+test_delete	t/delete.t	/^sub test_delete {$/;"	s
+test_insert	t/insert.t	/^sub test_insert {$/;"	s
+test_select	t/select.t	/^sub test_select {$/;"	s
+test_update	t/update.t	/^sub test_update {$/;"	s
