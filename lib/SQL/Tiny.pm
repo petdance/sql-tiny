@@ -62,23 +62,25 @@ I'd far rather have:
             salary    => 50000,
             status    => 'Active',
             dateadded => \'SYSDATE()',
+            qty       => \[ 'ROUND(?)', 14.5 ],
         }
     );
 
 than hand-coding:
 
-    my $sql   = 'INSERT INTO users (name,salary,status,dateadded) VALUES (:name,:status,:salary,SYSDATE())';
+    my $sql   = 'INSERT INTO users (name,salary,status,dateadded,qty) VALUES (:name,:status,:salary,SYSDATE(),ROUND(:qty))';
     my $binds = {
         ':name'      => 'Dave',
         ':salary'    => 50000,
         ':status'    => 'Active',
         ':dateadded' => \'SYSDATE()',
+        ':qty'       => 14.5,
     };
 
 or even the positional:
 
-    my $sql   = 'INSERT INTO users (name,salary,status,dateadded) VALUES (?,?,?,SYSDATE())';
-    my $binds = [ 'Dave', 50000, 'Active' ];
+    my $sql   = 'INSERT INTO users (name,salary,status,dateadded,qty) VALUES (?,?,?,SYSDATE(),ROUND(?))';
+    my $binds = [ 'Dave', 50000, 'Active', 14.5 ];
 
 The trade-off for that brevity of code is that SQL::Tiny has to make new
 SQL and binds from the input every time. You can't cache the SQL that
@@ -187,6 +189,13 @@ sub sql_insert {
         elsif ( ref($value) eq 'SCALAR' ) {
             push @values, ${$value};
         }
+        elsif ( ref($value) eq 'REF' ) {
+            my $deepval = ${$value};
+
+            my ($literal,$bind) = @{$deepval};
+            push @values, $literal;
+            push @binds, $bind;
+        }
         else {
             push @values, '?';
             push @binds, $value;
@@ -245,6 +254,13 @@ sub sql_update {
         }
         elsif ( ref($value) eq 'SCALAR' ) {
             push @columns, "$key=${$value}";
+        }
+        elsif ( ref($value) eq 'REF' ) {
+            my $deepval = ${$value};
+
+            my ($literal,$bind) = @{$deepval};
+            push @columns, "$key=$literal";
+            push @binds, $bind;
         }
         else {
             push @columns, "$key=?";
@@ -319,6 +335,13 @@ sub _build_where_section {
         }
         elsif ( ref($value) eq 'SCALAR' ) {
             push @conditions, "$key=${$value}";
+        }
+        elsif ( ref($value) eq 'REF' ) {
+            my $deepval = ${$value};
+
+            my ($literal,$bind) = @{$deepval};
+            push @conditions, "$key=$literal";
+            push @{$binds}, $bind;
         }
         else {
             push @conditions, "$key=?";
