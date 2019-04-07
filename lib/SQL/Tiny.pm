@@ -153,17 +153,17 @@ Calling:
     my ($sql,$binds) = sql_insert(
         'users',
         {
-            serialno   => '12345',
-            name       => 'Dave',
-            rank       => 'Sergeant',
-            height     => undef,
-            date_added => \'SYSDATE()',
+            serialno  => '12345',
+            name      => 'Dave',
+            rank      => 'Sergeant',
+            height    => undef,
+            dateadded => \'SYSDATE()',
         }
     );
 
 returns:
 
-    $sql   = 'INSERT INTO users (date_added,height,name,rank,serialno) VALUES (SYSDATE(),NULL,?,?,?)';
+    $sql   = 'INSERT INTO users (dateadded,height,name,rank,serialno) VALUES (SYSDATE(),NULL,?,?,?)';
     $binds = [ 'Dave', 'Sergeant', 12345 ]
 
 =cut
@@ -286,16 +286,16 @@ Calling:
     my ($sql,$binds) = sql_delete(
         'users',
         {
-            serialno   => 12345,
-            height     => undef,
-            date_added => \'SYSDATE()',
-            status     => [qw( X Y Z )],
+            serialno  => 12345,
+            height    => undef,
+            dateadded => \'SYSDATE()',
+            status    => [qw( X Y Z )],
         },
     );
 
 returns:
 
-    $sql   = 'DELETE FROM users WHERE date_added = SYSDATE() AND height IS NULL AND serialno = ? AND status IN (?,?,?)'
+    $sql   = 'DELETE FROM users WHERE dateadded = SYSDATE() AND height IS NULL AND serialno = ? AND status IN (?,?,?)'
     $binds = [ 12345, 'X', 'Y', 'Z' ]
 
 =cut
