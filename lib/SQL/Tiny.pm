@@ -30,6 +30,8 @@ our %EXPORT_TAGS = (
 );
 
 
+our $NAMED_BINDS;
+
 =head1 SYNOPSIS
 
     my ($sql,$binds) = sql_select( 'users', [ 'name', 'status' ], { status => [ 'Deleted', 'Inactive' ] }, { order_by => 'name' } );

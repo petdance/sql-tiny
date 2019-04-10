@@ -60,5 +60,7 @@ sub check_call {
 
         is( $sql, $expected_positional->[0], 'Positional SQL matches' );
         is_deeply( $binds, $expected_positional->[1], 'Positional binds match' );
+
+        local $SQL::Tiny::NAMED_BINDS = 1;
     };
 }
