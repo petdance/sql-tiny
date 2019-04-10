@@ -70,11 +70,10 @@ than hand-coding:
 
     my $sql   = 'INSERT INTO users (name,salary,status,dateadded,qty) VALUES (:name,:status,:salary,SYSDATE(),ROUND(:qty))';
     my $binds = {
-        ':name'      => 'Dave',
-        ':salary'    => 50000,
-        ':status'    => 'Active',
-        ':dateadded' => \'SYSDATE()',
-        ':qty'       => 14.5,
+        ':name'   => 'Dave',
+        ':salary' => 50000,
+        ':status' => 'Active',
+        ':qty'    => 14.5,
     };
 
 or even the positional:
