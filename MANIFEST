@@ -6,6 +6,7 @@ README.md
 t/00-load.t
 t/delete.t
 t/insert.t
+t/named-binds.t
 t/select.t
 t/update.t
 
