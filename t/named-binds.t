@@ -18,17 +18,25 @@ my @args = (
     {
         orderdate => \'SYSDATE()',
         qty       => \[ 'ROUND(?)', 14.5 ],
+        status    => [ 'A', 'B', 'C' ],
     },
 );
 
 my @expected_positional = (
-    'UPDATE users SET lockdate=NULL, qty=TRUNC(?), status=? WHERE orderdate=SYSDATE() AND qty=ROUND(?)',
-    [ 19.85, 'X', 14.5 ],
+    'UPDATE users SET lockdate=NULL, qty=TRUNC(?), status=? WHERE orderdate=SYSDATE() AND qty=ROUND(?) AND status IN (?,?,?)',
+    [ 19.85, 'X', 14.5, 'A', 'B', 'C' ],
 );
 
 my @expected_named = (
-    'UPDATE users SET lockdate=NULL, qty=TRUNC(:qty), status=:status WHERE orderdate=SYSDATE() AND qty=ROUND(:qty2)',
-    { ':qty' => 19.85, ':status' => 'X', ':qty2' => 14.5 },
+    'UPDATE users SET lockdate=NULL, qty=TRUNC(:qty), status=:status WHERE orderdate=SYSDATE() AND qty=ROUND(:qty2) AND status IN (:status1,:status2,:status3)',
+    {
+        ':qty'     => 19.85,
+        ':status'  => 'X',
+        ':qty2'    => 14.5,
+        ':status1' => 'A',
+        ':status2' => 'B',
+        ':status3' => 'C',
+    }
 );
 
 check_call(
