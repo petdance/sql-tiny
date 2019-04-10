@@ -328,16 +328,20 @@ sub _build_where_section {
     for my $key ( sort keys %{$where} ) {
         my $value = $where->{$key};
         if ( !defined($value) ) {
+            # field => undef
             push @conditions, "$key IS NULL";
         }
         elsif ( ref($value) eq 'ARRAY' ) {
+            # field => [ $var1, $var2 ]
             push @conditions, "$key IN (" . join( ',', ('?') x @{$value} ) . ')';
             push @{$binds}, @{$value};
         }
         elsif ( ref($value) eq 'SCALAR' ) {
+            # field => \'literal'
             push @conditions, "$key=${$value}";
         }
         elsif ( ref($value) eq 'REF' ) {
+            # field => \[ 'FUNC(?)', $var ]
             my $deepval = ${$value};
 
             my ($literal,$bind) = @{$deepval};
@@ -345,6 +349,7 @@ sub _build_where_section {
             push @{$binds}, $bind;
         }
         else {
+            # field => $var
             push @conditions, "$key=?";
             push @{$binds}, $value;
         }
