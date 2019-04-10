@@ -70,5 +70,9 @@ sub check_call {
         is_deeply( $binds, $expected_positional->[1], 'Positional binds match' );
 
         local $SQL::Tiny::NAMED_BINDS = 1;
+
+        ($sql,$binds) = $func->( @{$args} );
+        is( $sql, $expected_named->[0], 'Named SQL matches' );
+        is_deeply( $binds, $expected_named->[1], 'Named binds match' );
     };
 }
