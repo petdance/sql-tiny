@@ -4,9 +4,25 @@ use warnings;
 use strict;
 use 5.010;
 
-use Test::More tests => 3;
+use Test::More tests => 4;
 
 use SQL::Tiny ':all';
+
+
+test_update(
+    'users',
+    {
+        updated_date => \'SYSDATE',
+        deleted_date => undef,
+    },
+    {},
+
+    'UPDATE users SET deleted_date=NULL, updated_date=SYSDATE',
+    [],
+
+    'Empty WHERE'
+);
+
 
 test_update(
     'users',
