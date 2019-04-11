@@ -4,9 +4,35 @@ use warnings;
 use strict;
 use 5.010;
 
-use Test::More tests => 7;
+use Test::More tests => 9;
 
 use SQL::Tiny ':all';
+
+
+test_select(
+    [
+        'users',
+        [ 'name' ],
+        {}
+    ],
+
+    'SELECT name FROM users',
+    []
+);
+
+
+test_select(
+    [
+        'users',
+        [ 'name' ],
+        {},
+        { order_by => 'id' }
+    ],
+
+    'SELECT name FROM users ORDER BY id',
+    []
+);
+
 
 test_select(
     [
