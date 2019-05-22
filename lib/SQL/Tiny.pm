@@ -251,12 +251,15 @@ sub sql_update {
         my $value = $values->{$key};
 
         if ( !defined($value) ) {
+            # field => undef
             push @columns, "$key=NULL";
         }
         elsif ( ref($value) eq 'SCALAR' ) {
+            # field => \'literal'
             push @columns, "$key=${$value}";
         }
         elsif ( ref($value) eq 'REF' ) {
+            # field => \[ 'FUNC(?)', $var ]
             my $deepval = ${$value};
 
             my ($literal,$bind) = @{$deepval};
@@ -264,6 +267,7 @@ sub sql_update {
             push @binds, $bind;
         }
         else {
+            # field => $var
             push @columns, "$key=?";
             push @binds, $value;
         }
