@@ -249,12 +249,15 @@ sub sql_update {
         my $value = $values->{$key};
 
         if ( !defined($value) ) {
+            # field => undef
             push @columns, "$key=NULL";
         }
         elsif ( ref($value) eq 'SCALAR' ) {
+            # field => \'literal'
             push @columns, "$key=${$value}";
         }
         elsif ( ref($value) eq 'REF' ) {
+            # field => \[ 'FUNC(?)', $var ]
             my $deepval = ${$value};
 
             my ($literal,$bind) = @{$deepval};
@@ -262,6 +265,7 @@ sub sql_update {
             push @binds, $bind;
         }
         else {
+            # field => $var
             push @columns, "$key=?";
             push @binds, $value;
         }
@@ -326,16 +330,20 @@ sub _build_where_section {
     for my $key ( sort keys %{$where} ) {
         my $value = $where->{$key};
         if ( !defined($value) ) {
+            # field => undef
             push @conditions, "$key IS NULL";
         }
         elsif ( ref($value) eq 'ARRAY' ) {
+            # field => [ $var1, $var2 ]
             push @conditions, "$key IN (" . join( ',', ('?') x @{$value} ) . ')';
             push @{$binds}, @{$value};
         }
         elsif ( ref($value) eq 'SCALAR' ) {
+            # field => \'literal'
             push @conditions, "$key=${$value}";
         }
         elsif ( ref($value) eq 'REF' ) {
+            # field => \[ 'FUNC(?)', $var ]
             my $deepval = ${$value};
 
             my ($literal,$bind) = @{$deepval};
@@ -343,6 +351,7 @@ sub _build_where_section {
             push @{$binds}, $bind;
         }
         else {
+            # field => $var
             push @conditions, "$key=?";
             push @{$binds}, $value;
         }
