@@ -183,12 +183,15 @@ sub sql_insert {
         my $value = $values->{$key};
 
         if ( !defined($value) ) {
+            # field => undef
             push @values, 'NULL';
         }
         elsif ( ref($value) eq 'SCALAR' ) {
+            # field => \'literal'
             push @values, ${$value};
         }
         elsif ( ref($value) eq 'REF' ) {
+            # field => \[ 'FUNC(?)', $var ]
             my $deepval = ${$value};
 
             my ($literal,$bind) = @{$deepval};
@@ -196,6 +199,7 @@ sub sql_insert {
             push @binds, $bind;
         }
         else {
+            # field => $var
             push @values, '?';
             push @binds, $value;
         }
