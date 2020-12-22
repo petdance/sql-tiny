@@ -46,7 +46,7 @@ or even the positional:
 
 # Build status of dev branch
 
-* Travis (Linux) [![Build Status](https://travis-ci.org/petdance/sql-tiny.png?branch=dev)](https://travis-ci.org/petdance/sql-tiny)
+[![Build Status](https://github.com/petdance/sql-tiny/workflows/testsuite/badge.svg?branch=dev)](https://github.com/petdance/sql-tiny/actions?query=workflow%3Atestsuite+branch%3Adev)
 * [CPAN Testers](https://cpantesters.org/distro/S/sql-tiny.html)
 
 # Installation
@@ -78,7 +78,7 @@ You can also look for information at:
 
 # License and Copyright
 
-Copyright (C) 2019 Andy Lester
+Copyright (C) 2019-2020 Andy Lester
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of the the
