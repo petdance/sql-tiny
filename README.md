@@ -67,14 +67,14 @@ perldoc command.
 
 You can also look for information at:
 
-    MetaCPAN
-        https://metacpan.org/release/SQL-Tiny
+* MetaCPAN
+    * https://metacpan.org/release/SQL-Tiny
 
-    Project home page
-        https://github.com/petdance/sql-tiny
+* Project home page
+    * https://github.com/petdance/sql-tiny
 
-    Project issue tracker
-        https://github.com/petdance/sql-tiny/issues
+* Project issue tracker
+    * https://github.com/petdance/sql-tiny/issues
 
 # License and Copyright
 
@@ -82,4 +82,4 @@ Copyright (C) 2019-2020 Andy Lester
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of the the
-[Artistic License 2.0](http://www.perlfoundation.org/artistic_license_2_0).
+[Artistic License 2.0](https://www.perlfoundation.org/artistic-license-20.html).
